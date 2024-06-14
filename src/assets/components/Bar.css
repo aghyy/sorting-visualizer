@@ -1,0 +1,70 @@
+.bar {
+	height: 200px;
+	width: 2em;
+	margin-right: 2em;
+	transform-style: preserve-3d;
+	transform: rotateX(-20deg) rotateY(-30deg);
+}
+
+.bar:last-of-type {
+	margin-right: 0;
+}
+
+.side {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: rgba(100, 100, 100, 0.25);
+}
+
+.back {
+	transform: translateZ(-4px);
+}
+
+.left {
+	transform-origin: left;
+	transform: rotateY(90deg);
+}
+
+.right {
+	transform-origin: right;
+	transform: rotateY(-90deg);
+}
+
+.top {
+	height: 34px;
+	transform-origin: top;
+	transform: rotateX(-90deg);
+	background: rgba(100, 100, 100, 0.15);
+}
+
+.bottom {
+	height: 34px;
+	transform-origin: top;
+	transition: 0.3s;
+}
+
+.color-bar {
+	transition: 0.3s;
+}
+
+.input {
+	text-align: center;
+	transform: rotate(-90deg);
+	outline: none;
+	color: #fff;
+}
+
+.quantity-button {
+	display: none;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}

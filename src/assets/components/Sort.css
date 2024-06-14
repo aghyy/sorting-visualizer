@@ -1,0 +1,52 @@
+.sort-card-frame {
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sort-bar-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 220px;
+}
+
+.sort-bar-card {
+	border-radius: 10px;
+	padding: .5em 2em 0 1em;
+	background-color: #fff;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.controller {
+	background: #555;
+	margin: 0 1em;
+	border: 1px solid;
+	height: 3em;
+	width: 3em;
+	border-radius: 100%;
+	background: transparent;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sort-card-controls-buttons {
+	height: 4em;
+	width: 15em;
+	background-color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sort-card-controls {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    margin: 15px 0;
+}

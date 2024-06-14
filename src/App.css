@@ -1,0 +1,9 @@
+.app-container {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 160px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
