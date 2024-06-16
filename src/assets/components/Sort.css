@@ -33,6 +33,10 @@
 	align-items: center;
 }
 
+.controller:disabled {
+	cursor: not-allowed;
+}
+
 .sort-card-controls-buttons {
 	height: 4em;
 	width: 15em;
@@ -40,7 +44,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    border-radius: 10px;
+	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -48,5 +52,25 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    margin: 15px 0;
+	margin-top: 15px;
+}
+
+@media (prefers-color-scheme: dark) {
+	.sort-bar-card {
+		background-color: #1e1e1e;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+		color: #ffffff;
+	}
+
+	.controller {
+		background: #333;
+		border-color: #555;
+		color: #ffffff;
+	}
+
+	.sort-card-controls-buttons {
+		background-color: #1e1e1e;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+		color: #ffffff;
+	}
 }

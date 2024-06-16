@@ -15,11 +15,10 @@
   max-width: 400px;
   width: 100%;
   margin: 20px;
-  max-height: 600px;
   overflow: hidden;
 }
 
-.card label {
+.card>label {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
@@ -37,8 +36,12 @@
   font-size: 16px;
 }
 
+.card input:not([type="checkbox"]):last-of-type {
+  margin-bottom: 0;
+}
+
 .card select {
-  background-image: url("/arrow-down-icon.png");
+  background-image: url("/arrow-down-icon-black.png");
   background-repeat: no-repeat;
   background-position: right 2% center;
   background-size: 24px 24px;
@@ -54,6 +57,11 @@
   cursor: pointer;
   font-size: 16px;
   transition: background 0.3s ease;
+  margin-right: 10px;
+}
+
+.card button:last-of-type {
+  margin-right: 0;
 }
 
 .card button:hover {
@@ -65,7 +73,7 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  margin: 8px 0;
+  margin: 15px 0 8px 0;
 }
 
 .card p:nth-child(even) {
@@ -89,4 +97,124 @@
 .checkbox-wrapper input[type="checkbox"] {
   margin: 1px 8px;
   height: 18px;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.switch-container>span {
+  margin-right: 10px;
+}
+
+.switches {
+  margin: 15px 0;
+}
+
+.sort-card {
+  margin: 20px;
+}
+
+.sort-popup-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999999;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.sort-popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+
+.sort-popup-content .close-button svg {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.sort-popup-content .close-button svg:hover {
+  color: #007bff;
+}
+
+@media only screen and (max-width: 1024px) {
+  .card-wrapper {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 768px) {}
+
+@media only screen and (max-width: 480px) {}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+  }
+
+  .card p {
+    background: #2b2b2b;
+    border: 1px solid #333333;
+  }
+
+  .card p:nth-child(even) {
+    background: #202020;
+  }
+
+  .card select,
+  .card input:not([type="checkbox"]) {
+    background-color: #333333;
+    border-color: #555555;
+    color: #ffffff;
+  }
+
+  .card select {
+    background-image: url("/arrow-down-icon-white.png");
+  }
+
+  .card button {
+    background: #007bff;
+    color: #ffffff;
+  }
+
+  .card button:hover {
+    background: #0056b3;
+  }
+
+  .sort-popup-background {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .sort-popup-content {
+    background: #1e1e1e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .sort-popup-content .close-button svg:hover {
+    color: #007bff;
+  }
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { BubbleSort, InsertionSort, SelectionSort } from '../algorithms';
-import { IoPlay, IoPlaySkipBack, IoPlaySkipForward, IoRefreshOutline } from "react-icons/io5";
+import { IoPlay, IoPlaySkipBack, IoPlaySkipForward, IoRefreshOutline, IoPause } from "react-icons/io5";
 import Bar from './Bar';
 import './Sort.css';
 
@@ -20,6 +20,7 @@ const Sort = ({ algorithm, inputArray }) => {
     const [delay] = useState(500);
     const [timeouts, setTimeouts] = useState([]);
     const [shouldGenerateSteps, setShouldGenerateSteps] = useState(false);
+    const [isRunning, setIsRunning] = useState(false);
 
     const generateSteps = useCallback((newArray, newArraySteps, newColorSteps) => {
         let arrayCopy = newArray.slice();
@@ -97,14 +98,14 @@ const Sort = ({ algorithm, inputArray }) => {
     };
 
     const previousStep = () => {
-        if (currentStep === 0) return;
+        if (currentStep === 0 || isRunning) return;
         setCurrentStep(currentStep - 1);
         setArray(arraySteps[currentStep - 1]);
         setColorKey(colorSteps[currentStep - 1]);
     };
 
     const nextStep = () => {
-        if (currentStep >= arraySteps.length - 1) {
+        if (currentStep >= arraySteps.length - 1 || isRunning) {
             setColorKey(colorSteps[currentStep]);
             return;
         }
@@ -117,26 +118,31 @@ const Sort = ({ algorithm, inputArray }) => {
 
     const start = () => {
         clearTimeouts();
+        setIsRunning(true);
 
         let timeoutsArray = [];
-        let i = 0;
-
-        while (i < arraySteps.length - currentStep) {
+        for (let i = currentStep; i < arraySteps.length; i++) {
             let timeout = setTimeout(() => {
                 setCurrentStep((prev) => {
-                    let newStep = prev + 1;
+                    const newStep = prev + 1;
                     if (newStep < arraySteps.length) {
                         setArray(arraySteps[newStep]);
                         setColorKey(colorSteps[newStep]);
+                    } else {
+                        setIsRunning(false);
                     }
                     return newStep;
                 });
-                timeoutsArray.push(timeout);
-            }, delay * i);
-            i++;
+            }, delay * (i - currentStep));
+            timeoutsArray.push(timeout);
         }
 
         setTimeouts(timeoutsArray);
+    };
+
+    const pause = () => {
+        clearTimeouts();
+        setIsRunning(false);
     };
 
     let bars = array.map((value, index) => (
@@ -153,8 +159,14 @@ const Sort = ({ algorithm, inputArray }) => {
 
     if (arraySteps.length === currentStep) {
         playButton = (
-            <button className='controller' onClick={() => { inputArray && inputArray.length > 0 ? generateInputArray() : generateRandomArray() }}>
+            <button className='controller' onClick={() => { inputArray && inputArray.length > 0 ? generateInputArray() : generateRandomArray() }} disabled={isRunning}>
                 <IoRefreshOutline />
+            </button>
+        );
+    } else if (isRunning) {
+        playButton = (
+            <button className='controller' onClick={pause}>
+                <IoPause />
             </button>
         );
     } else {
@@ -172,11 +184,11 @@ const Sort = ({ algorithm, inputArray }) => {
             </div>
             <div className='sort-card-controls'>
                 <div className='sort-card-controls-buttons'>
-                    <button className='controller' onClick={previousStep}>
+                    <button className='controller' onClick={previousStep} disabled={isRunning}>
                         <IoPlaySkipBack />
                     </button>
                     {playButton}
-                    <button className='controller' onClick={nextStep}>
+                    <button className='controller' onClick={nextStep} disabled={isRunning}>
                         <IoPlaySkipForward />
                     </button>
                 </div>

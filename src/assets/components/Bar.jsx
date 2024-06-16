@@ -98,6 +98,7 @@ function Bar({ index, length, color, changeArray }) {
 							value={len}
 							className='input'
 							onChange={handleChange}
+							readOnly
 						/>
 					</div>
 				</div>

@@ -1,9 +1,50 @@
 .app-container {
     position: absolute;
     top: 120px;
-    left: 0;
-    width: 100vw;
+    left: 5em;
+    width: calc(100vw - 10em);
     height: calc(100vh - 160px);
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+.app-container::before,
+.app-container::after {
+    content: '';
+    position: fixed;
+    left: 80px;
+    right: 80px;
+    height: 20px;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.app-container::before {
+    top: 120px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), transparent);
+    opacity: 0;
+}
+
+.app-container::after {
+    bottom: 40px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+    opacity: 0;
+}
+
+.app-container.shadow-top::before {
+    opacity: 1;
+}
+
+.app-container.shadow-bottom::after {
+    opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .app-container::before {
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    .app-container::after {
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.2), transparent);
+    }
 }

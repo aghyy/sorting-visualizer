@@ -5,6 +5,8 @@ import logo from '../images/sort.svg';
 const NavBar = ({ setSelectedOption }) => {
     return (
         <nav>
+            <img src={logo} alt="sort-icon" className='logo' />
+            
             <ul>
                 <li>
                     <a href="#" onClick={() => setSelectedOption('Algorithm')}>Algorithm</a>
@@ -19,8 +21,6 @@ const NavBar = ({ setSelectedOption }) => {
                     <a href="#" onClick={() => setSelectedOption('BubbleSort')}>Bubble Sort</a>
                 </li>
             </ul>
-
-            <img src={logo} alt="sort-icon" className='logo' />
         </nav>
     );
 };
