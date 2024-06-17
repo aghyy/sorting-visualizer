@@ -5,10 +5,13 @@ import Algorithm from './assets/components/Algorithm';
 import InsertionSort from './assets/components/InsertionSort';
 import SelectionSort from './assets/components/SelectionSort';
 import BubbleSort from './assets/components/BubbleSort';
+import { vscDarkPlus, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 function App() {
   const [selectedOption, setSelectedOption] = useState('Algorithm');
   const appContainerRef = useRef(null);
+  const [theme, setTheme] = useState('light');
+  const codeStyle = theme === 'dark' ? vscDarkPlus : vs;
 
   const [algorithmState, setAlgorithmState] = useState({
     algorithm: '',
@@ -71,6 +74,17 @@ function App() {
     };
   }, [selectedOption]);
 
+  useEffect(() => {
+    const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    setTheme(matchMedia.matches ? 'dark' : 'light');
+    const handler = (e) => setTheme(e.matches ? 'dark' : 'light');
+    matchMedia.addEventListener('change', handler);
+    
+    return () => {
+      matchMedia.removeEventListener('change', handler);
+    };
+  }, []);
+
   return (
     <>
       <NavBar setSelectedOption={setSelectedOption} />
@@ -79,9 +93,9 @@ function App() {
         {selectedOption === 'Algorithm' &&
           <Algorithm algorithmState={algorithmState} updateAlgorithmState={updateAlgorithmState} />
         }
-        {selectedOption === 'InsertionSort' && <InsertionSort />}
-        {selectedOption === 'SelectionSort' && <SelectionSort />}
-        {selectedOption === 'BubbleSort' && <BubbleSort />}
+        {selectedOption === 'InsertionSort' && <InsertionSort codeStyle={codeStyle} />}
+        {selectedOption === 'SelectionSort' && <SelectionSort codeStyle={codeStyle} />}
+        {selectedOption === 'BubbleSort' && <BubbleSort codeStyle={codeStyle} />}
       </div>
     </>
   );

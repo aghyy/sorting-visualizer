@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sort from './Sort';
 import './SortContainer.css';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { IoCopyOutline } from "react-icons/io5";
 import { MathJax, MathJaxContext } from 'better-react-mathjax';
 import { handleCopy } from '../utils';
 
-const SelectionSort = () => {
+const SelectionSort = ({ codeStyle }) => {
   const [copied, setCopied] = useState(false);
   const [showSpan, setShowSpan] = useState(false);
 
@@ -67,7 +66,7 @@ const SelectionSort = () => {
               </button>
               {showSpan && <span className='tooltip'>{copied ? 'Copied!' : 'Copy'}</span>}
             </div>
-            <SyntaxHighlighter language='python' style={vscDarkPlus}>
+            <SyntaxHighlighter language='python' style={codeStyle}>
               {`def selection_sort(arr):
   n = len(arr)
   for i in range(n):
