@@ -93,8 +93,8 @@
 	width: 100%;
 	height: 14px;
 	cursor: pointer;
-	box-shadow: 1px 1px 1px #50555C;
-	background: #50555C;
+	box-shadow: 1px 1px 1px #d1d1d1;
+	background: #d1d1d1;
 	border-radius: 14px;
 	border: 0px solid #000000;
 }
@@ -112,15 +112,15 @@
 }
 
 .delay-control input[type=range]:focus::-webkit-slider-runnable-track {
-	background: #50555C;
+	background: #d1d1d1;
 }
 
 .delay-control input[type=range]::-moz-range-track {
 	width: 100%;
 	height: 14px;
 	cursor: pointer;
-	box-shadow: 1px 1px 1px #50555C;
-	background: #50555C;
+	box-shadow: 1px 1px 1px #d1d1d1;
+	background: #d1d1d1;
 	border-radius: 14px;
 	border: 0px solid #000000;
 }
@@ -145,17 +145,17 @@
 }
 
 .delay-control input[type=range]::-ms-fill-lower {
-	background: #50555C;
+	background: #d1d1d1;
 	border: 0px solid #000000;
 	border-radius: 28px;
-	box-shadow: 1px 1px 1px #50555C;
+	box-shadow: 1px 1px 1px #d1d1d140;
 }
 
 .delay-control input[type=range]::-ms-fill-upper {
-	background: #50555C;
+	background: #d1d1d1;
 	border: 0px solid #000000;
 	border-radius: 28px;
-	box-shadow: 1px 1px 1px #50555C;
+	box-shadow: 1px 1px 1px #d1d1d1;
 }
 
 .delay-control input[type=range]::-ms-thumb {
@@ -170,13 +170,12 @@
 }
 
 .delay-control input[type=range]:focus::-ms-fill-lower {
-	background: #50555C;
+	background: #d1d1d1;
 }
 
 .delay-control input[type=range]:focus::-ms-fill-upper {
-	background: #50555C;
+	background: #d1d1d1;
 }
-
 
 @media (prefers-color-scheme: dark) {
 	.sort-bar-card {
@@ -203,5 +202,37 @@
 
 	.controller:disabled {
 		background-color: #555;
+	}
+
+	.delay-control input[type=range]::-webkit-slider-runnable-track {
+		box-shadow: 1px 1px 1px #50555C;
+		background: #50555C;
+	}
+	
+	.delay-control input[type=range]:focus::-webkit-slider-runnable-track {
+		background: #50555C;
+	}
+	
+	.delay-control input[type=range]::-moz-range-track {
+		box-shadow: 1px 1px 1px #50555C;
+		background: #50555C;
+	}
+	
+	.delay-control input[type=range]::-ms-fill-lower {
+		background: #50555C;
+		box-shadow: 1px 1px 1px #50555C;
+	}
+	
+	.delay-control input[type=range]::-ms-fill-upper {
+		background: #50555C;
+		box-shadow: 1px 1px 1px #50555C;
+	}
+	
+	.delay-control input[type=range]:focus::-ms-fill-lower {
+		background: #50555C;
+	}
+	
+	.delay-control input[type=range]:focus::-ms-fill-upper {
+		background: #50555C;
 	}
 }
