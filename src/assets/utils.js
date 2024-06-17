@@ -52,3 +52,23 @@ export const swap = (array, i, j) => {
   array[j] = c;
   return array;
 }
+
+export const formatTime = (milliseconds) => {
+  const minutes = Math.floor(milliseconds / 6000);
+  const seconds = Math.floor((milliseconds % 6000) / 100);
+  const remainingMilliseconds = milliseconds % 100;
+  return `${padZero(minutes)}:${padZero(seconds)}:${padZero(remainingMilliseconds)}`;
+}
+
+const padZero = (number) => {
+  return number.toString().padStart(2, '0');
+}
+
+export const handleCopy = (codeElement) => {
+  const code = codeElement.textContent;
+  navigator.clipboard.writeText(code);
+  setCopied(true);
+  setTimeout(() => {
+    setCopied(false);
+  }, 2000);
+}

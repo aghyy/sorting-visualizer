@@ -20,7 +20,6 @@
 }
 
 .controller {
-	background: #555;
 	margin: 0 1em;
 	border: 1px solid;
 	height: 3em;
@@ -31,10 +30,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-.controller:disabled {
-	cursor: not-allowed;
 }
 
 .sort-card-controls-buttons {
@@ -55,22 +50,158 @@
 	margin-top: 15px;
 }
 
+.controller:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+
+.controller:hover:not(:disabled) {
+	background-color: #f7f7f7;
+}
+
+.controller:active:not(:disabled) {
+	transform: scale(0.95);
+}
+
+.delay-control {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.delay-control p {
+	font-size: 1em;
+}
+
+.delay-control input[type=range] {
+	height: 26px;
+	-webkit-appearance: none;
+	margin: 10px 0;
+	width: 100%;
+	background-color: transparent;
+}
+
+.delay-control input[type=range]:disabled {
+	opacity: .5;
+	cursor: not-allowed;
+}
+
+.delay-control input[type=range]:focus {
+	outline: none;
+}
+
+.delay-control input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 14px;
+	cursor: pointer;
+	box-shadow: 1px 1px 1px #50555C;
+	background: #50555C;
+	border-radius: 14px;
+	border: 0px solid #000000;
+}
+
+.delay-control input[type=range]::-webkit-slider-thumb {
+	box-shadow: 0px 0px 0px #000000;
+	border: 0px solid #000000;
+	height: 20px;
+	width: 40px;
+	border-radius: 12px;
+	background: #007bff;
+	cursor: pointer;
+	-webkit-appearance: none;
+	margin-top: -3px;
+}
+
+.delay-control input[type=range]:focus::-webkit-slider-runnable-track {
+	background: #50555C;
+}
+
+.delay-control input[type=range]::-moz-range-track {
+	width: 100%;
+	height: 14px;
+	cursor: pointer;
+	box-shadow: 1px 1px 1px #50555C;
+	background: #50555C;
+	border-radius: 14px;
+	border: 0px solid #000000;
+}
+
+.delay-control input[type=range]::-moz-range-thumb {
+	box-shadow: 0px 0px 0px #000000;
+	border: 0px solid #000000;
+	height: 20px;
+	width: 40px;
+	border-radius: 12px;
+	background: #007bff;
+	cursor: pointer;
+}
+
+.delay-control input[type=range]::-ms-track {
+	width: 100%;
+	height: 14px;
+	cursor: pointer;
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+}
+
+.delay-control input[type=range]::-ms-fill-lower {
+	background: #50555C;
+	border: 0px solid #000000;
+	border-radius: 28px;
+	box-shadow: 1px 1px 1px #50555C;
+}
+
+.delay-control input[type=range]::-ms-fill-upper {
+	background: #50555C;
+	border: 0px solid #000000;
+	border-radius: 28px;
+	box-shadow: 1px 1px 1px #50555C;
+}
+
+.delay-control input[type=range]::-ms-thumb {
+	margin-top: 1px;
+	box-shadow: 0px 0px 0px #000000;
+	border: 0px solid #000000;
+	height: 20px;
+	width: 40px;
+	border-radius: 12px;
+	background: #007bff;
+	cursor: pointer;
+}
+
+.delay-control input[type=range]:focus::-ms-fill-lower {
+	background: #50555C;
+}
+
+.delay-control input[type=range]:focus::-ms-fill-upper {
+	background: #50555C;
+}
+
+
 @media (prefers-color-scheme: dark) {
 	.sort-bar-card {
-		background-color: #1e1e1e;
+		background-color: #333;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+		color: #ffffff;
+	}
+
+	.sort-card-controls-buttons {
+		background-color: #333;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 		color: #ffffff;
 	}
 
 	.controller {
-		background: #333;
+		background-color: #007bff;
 		border-color: #555;
 		color: #ffffff;
 	}
 
-	.sort-card-controls-buttons {
-		background-color: #1e1e1e;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-		color: #ffffff;
+	.controller:hover:not(:disabled) {
+		background-color: #0056b3;
+	}
+
+	.controller:disabled {
+		background-color: #555;
 	}
 }

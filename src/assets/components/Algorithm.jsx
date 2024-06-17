@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './Algorithm.css';
-import { bubbleSort, selectionSort, insertionSort } from '../utils';
+import { bubbleSort, selectionSort, insertionSort, formatTime } from '../utils';
 import Sort from './Sort';
 import ToggleSwitch from './ToggleSwitch';
 import { IoCloseOutline } from "react-icons/io5";
 
-const Algorithm = () => {
-  const [algorithm, setAlgorithm] = useState('');
-  const [inputArray, setInputArray] = useState('');
-  const [sortedArray, setSortedArray] = useState([]);
-  const [sortingSteps, setSortingSteps] = useState([]);
-  const [showAnimation, setShowAnimation] = useState(false);
-  const [displayAnimation, setDisplayAnimation] = useState(false);
-  const [fullAlgorithm, setFullAlgorithm] = useState('');
-  const [inputtedArray, setInputtedArray] = useState([]);
-  const [displaySteps, setDisplaySteps] = useState(false);
-  const [keyVal, setKeyVal] = useState(0);
+const Algorithm = ({ algorithmState, updateAlgorithmState }) => {
+  const {
+    algorithm,
+    inputArray,
+    sortedArray,
+    sortingSteps,
+    showAnimation,
+    displayAnimation,
+    fullAlgorithm,
+    inputtedArray,
+    displaySteps,
+    keyVal,
+  } = algorithmState;
 
   useEffect(() => {
     const handleEnterKeyPress = (event) => {
@@ -37,20 +39,22 @@ const Algorithm = () => {
   }, [algorithm, inputArray, showAnimation, sortingSteps]);
 
   const handleAlgorithmChange = (event) => {
-    setAlgorithm(event.target.value);
+    updateAlgorithmState({ algorithm: event.target.value });
   };
 
   const handleInputChange = (event) => {
-    setInputArray(event.target.value);
+    updateAlgorithmState({ inputArray: event.target.value });
   };
 
   const handleShowAnimation = (event) => {
     const array = inputArray.split(',').map((num) => parseInt(num.trim()));
     if (algorithm === '' || array.some(isNaN) || !sortingSteps || sortingSteps.length === 0) return;
     let algorithmSelect = document.getElementById('algorithm');
-    setFullAlgorithm(algorithmSelect.options[algorithmSelect.selectedIndex].textContent);
-    setInputtedArray(array);
-    setDisplayAnimation(true);
+    updateAlgorithmState({
+      fullAlgorithm: algorithmSelect.options[algorithmSelect.selectedIndex].textContent,
+      inputtedArray: array,
+      displayAnimation: true
+    });
   };
 
   const handleSort = () => {
@@ -66,10 +70,12 @@ const Algorithm = () => {
 
     if (showAnimation) {
       let algorithmSelect = document.getElementById('algorithm');
-      setDisplayAnimation(true);
-      setFullAlgorithm(algorithmSelect.options[algorithmSelect.selectedIndex].textContent);
-      setInputtedArray(inputArray.split(',').map((num) => parseInt(num.trim())));
-      setKeyVal(keyVal + 1);
+      updateAlgorithmState({
+        displayAnimation: true,
+        fullAlgorithm: algorithmSelect.options[algorithmSelect.selectedIndex].textContent,
+        inputtedArray: inputArray.split(',').map((num) => parseInt(num.trim())),
+        keyVal: keyVal + 1
+      });
     }
 
     let steps = [];
@@ -81,13 +87,14 @@ const Algorithm = () => {
       steps = insertionSort(array);
     }
 
-    setSortedArray(steps[steps.length - 1]);
-    setSortingSteps(steps);
+    updateAlgorithmState({
+      sortedArray: steps[steps.length - 1],
+      sortingSteps: steps
+    });
   };
 
   return (
     <div className="card-wrapper">
-
       <div className="card">
         <label htmlFor="algorithm">Select sorting algorithm:</label>
         <select id="algorithm" value={algorithm} onChange={handleAlgorithmChange}>
@@ -102,16 +109,11 @@ const Algorithm = () => {
           id="inputArray"
           value={inputArray}
           onChange={handleInputChange}
-          onKeyPress={(event) => {
-            if (event.key === 'Enter') {
-              handleSort();
-            }
-          }}
         />
         <div className="switches">
           <div className="switch-container">
             <span>Show sorting steps</span>
-            <ToggleSwitch isChecked={displaySteps} setIsChecked={setDisplaySteps} />
+            <ToggleSwitch isChecked={displaySteps} setIsChecked={(value) => updateAlgorithmState({ displaySteps: value })} />
           </div>
         </div>
         <button onClick={handleSort}>Sort</button>
@@ -133,16 +135,15 @@ const Algorithm = () => {
       )}
 
       {displayAnimation && (
-        <div className='sort-popup-background' onClick={(e) => { e.target === e.currentTarget && setDisplayAnimation(false) }} >
+        <div className='sort-popup-background' onClick={(e) => { e.target === e.currentTarget && updateAlgorithmState({ displayAnimation: false }) }} >
           <div className='sort-popup-content'>
             <div className="close-button">
-              <IoCloseOutline onClick={() => setDisplayAnimation(false)} />
+              <IoCloseOutline onClick={() => updateAlgorithmState({ displayAnimation: false })} />
             </div>
             <Sort key={keyVal} algorithm={fullAlgorithm} inputArray={inputtedArray} />
           </div>
         </div>
       )}
-
     </div>
   );
 };

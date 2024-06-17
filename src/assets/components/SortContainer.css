@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 20px 0;
 }
 
 .sort-container h2 {
@@ -13,13 +14,148 @@
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
+    border: 1px solid #d1d1d1;
 }
 
-@media (prefers-color-scheme: dark) {  
+.sort-container-card {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    width: calc(100% - 2px);
+}
+
+.sort-container-card h4 {
+    margin: 0;
+    background-color: #f2f2f2;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 15px 25px;
+}
+
+.sort-container-card-content,
+.sort-container-card pre {
+    padding: 20px !important;
+    margin: 0 !important;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.copy-button {
+    position: absolute;
+    top: calc(52px + 10px);
+    right: 10px;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.copy-button:hover {
+    background-color: #d1d1d1;
+}
+
+.copy-button button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.copy-button span.tooltip {
+    width: 120px;
+    background-color: #f2f2f2;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 120%;
+    right: 0;
+    margin-left: -60px;
+}
+
+.sort-container-cards {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.sort-container-vertical {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sort-container-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sort-container-card-content ol,
+.sort-container-card-content ul {
+    margin: 0;
+}
+
+.sort-container-card-content p {
+    margin: 0;
+}
+
+.sort-container-card-content p:has(> strong) {
+    margin-top: 10px;
+}
+
+.inline-math span {
+    display: inline-block !important;
+}
+
+.time-complexity {
+    display: flex;
+    justify-content: space-between;
+}
+
+.MathJax {
+    font-size: 16px !important;
+}
+
+@media (prefers-color-scheme: dark) {
     .sort-definition {
-      background-color: #1e1e1e;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      color: #ffffff;
+        background-color: #1e1e1e;
+        border: 1px solid #2c2c2c;
     }
-  }
+
+    .sort-container-card {
+        background-color: #1e1e1e;
+        border: 1px solid #2c2c2c;
+    }
+
+    .sort-container-card h4 {
+        background-color: #131313;
+    }
+
+    .copy-button {
+        background-color: #131313;
+    }
+
+    .copy-button:hover {
+        background-color: #2c2c2c;
+    }
+
+    .copy-button button {
+        color: #fff;
+    }
+
+    .copy-button span.tooltip {
+        background-color: #131313;
+        border: 1px solid #2c2c2c;
+    }
+}

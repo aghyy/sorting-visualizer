@@ -10,6 +10,26 @@ function App() {
   const [selectedOption, setSelectedOption] = useState('Algorithm');
   const appContainerRef = useRef(null);
 
+  const [algorithmState, setAlgorithmState] = useState({
+    algorithm: '',
+    inputArray: '',
+    sortedArray: [],
+    sortingSteps: [],
+    showAnimation: false,
+    displayAnimation: false,
+    fullAlgorithm: '',
+    inputtedArray: [],
+    displaySteps: false,
+    keyVal: 0
+  });
+
+  const updateAlgorithmState = (newState) => {
+    setAlgorithmState((prevState) => ({
+      ...prevState,
+      ...newState
+    }));
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const appContainer = appContainerRef.current;
@@ -56,7 +76,9 @@ function App() {
       <NavBar setSelectedOption={setSelectedOption} />
 
       <div className="app-container" ref={appContainerRef}>
-        {selectedOption === 'Algorithm' && <Algorithm />}
+        {selectedOption === 'Algorithm' &&
+          <Algorithm algorithmState={algorithmState} updateAlgorithmState={updateAlgorithmState} />
+        }
         {selectedOption === 'InsertionSort' && <InsertionSort />}
         {selectedOption === 'SelectionSort' && <SelectionSort />}
         {selectedOption === 'BubbleSort' && <BubbleSort />}

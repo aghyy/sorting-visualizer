@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { BubbleSort, InsertionSort, SelectionSort } from '../algorithms';
+import { formatTime } from '../utils';
 import { IoPlay, IoPlaySkipBack, IoPlaySkipForward, IoRefreshOutline, IoPause } from "react-icons/io5";
 import Bar from './Bar';
 import './Sort.css';
@@ -17,7 +18,7 @@ const Sort = ({ algorithm, inputArray }) => {
     const [colorSteps, setColorSteps] = useState([]);
     const [currentStep, setCurrentStep] = useState(0);
     const [count, setCount] = useState(10);
-    const [delay] = useState(500);
+    const [delay, setDelay] = useState(500);
     const [timeouts, setTimeouts] = useState([]);
     const [shouldGenerateSteps, setShouldGenerateSteps] = useState(false);
     const [isRunning, setIsRunning] = useState(false);
@@ -64,6 +65,7 @@ const Sort = ({ algorithm, inputArray }) => {
     };
 
     const generateInputArray = () => {
+        resetTimer();
         clearTimeouts();
         clearColorKey();
         setArray(inputArray);
@@ -74,6 +76,7 @@ const Sort = ({ algorithm, inputArray }) => {
     }
 
     const generateRandomArray = () => {
+        resetTimer();
         clearTimeouts();
         clearColorKey();
         const temp = [];
@@ -119,6 +122,7 @@ const Sort = ({ algorithm, inputArray }) => {
     const start = () => {
         clearTimeouts();
         setIsRunning(true);
+        startTimer();
 
         let timeoutsArray = [];
         for (let i = currentStep; i < arraySteps.length; i++) {
@@ -130,6 +134,7 @@ const Sort = ({ algorithm, inputArray }) => {
                         setColorKey(colorSteps[newStep]);
                     } else {
                         setIsRunning(false);
+                        stopTimer();
                     }
                     return newStep;
                 });
@@ -143,6 +148,7 @@ const Sort = ({ algorithm, inputArray }) => {
     const pause = () => {
         clearTimeouts();
         setIsRunning(false);
+        stopTimer();
     };
 
     let bars = array.map((value, index) => (
@@ -177,8 +183,38 @@ const Sort = ({ algorithm, inputArray }) => {
         );
     }
 
+    const [timer, setTimer] = useState(0);
+    const [isTimerRunning, setIsTimerRunning] = useState(false);
+
+    useEffect(() => {
+        let interval;
+        if (isTimerRunning) {
+            interval = setInterval(() => {
+                setTimer((prevTimer) => prevTimer + 1);
+            }, 10);
+        }
+        return () => {
+            clearInterval(interval);
+        };
+    }, [isTimerRunning]);
+
+    const startTimer = () => {
+        setIsTimerRunning(true);
+    }
+
+    const stopTimer = () => {
+        setIsTimerRunning(false);
+    }
+
+    const resetTimer = () => {
+        setTimer(0);
+    }
+
     return (
         <div className='sort-card'>
+            <div className="timer">
+                <p>{formatTime(timer)}</p>
+            </div>
             <div className='sort-card-frame'>
                 <div className='sort-bar-div sort-bar-container sort-bar-card'>{bars}</div>
             </div>
@@ -192,6 +228,18 @@ const Sort = ({ algorithm, inputArray }) => {
                         <IoPlaySkipForward />
                     </button>
                 </div>
+            </div>
+            <div className="delay-control">
+                <input
+                    type="range"
+                    min="100"
+                    max="1000"
+                    step="100"
+                    defaultValue={delay}
+                    onChange={(e) => setDelay(parseInt(e.target.value))}
+                    disabled={isRunning}
+                />
+                <p>Current Value: {delay}</p>
             </div>
         </div>
     );
