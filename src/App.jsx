@@ -79,7 +79,7 @@ function App() {
     setTheme(matchMedia.matches ? 'dark' : 'light');
     const handler = (e) => setTheme(e.matches ? 'dark' : 'light');
     matchMedia.addEventListener('change', handler);
-    
+
     return () => {
       matchMedia.removeEventListener('change', handler);
     };
@@ -96,6 +96,16 @@ function App() {
         {selectedOption === 'InsertionSort' && <InsertionSort codeStyle={codeStyle} />}
         {selectedOption === 'SelectionSort' && <SelectionSort codeStyle={codeStyle} />}
         {selectedOption === 'BubbleSort' && <BubbleSort codeStyle={codeStyle} />}
+      </div>
+
+      <div className='fixed-footer'>
+        <div className="left-footer">
+          <p>Supports Light/Dark Mode</p>
+        </div>
+        <div className="center-footer">
+          <p>© 2024 • Built by Andreas</p>
+        </div>
+        <div className="right-footer"></div>
       </div>
     </>
   );

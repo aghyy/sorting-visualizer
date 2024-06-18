@@ -64,7 +64,7 @@ const padZero = (number) => {
   return number.toString().padStart(2, '0');
 }
 
-export const handleCopy = (codeElement) => {
+export const handleCopy = (setCopied, codeElement) => {
   const code = codeElement.textContent;
   navigator.clipboard.writeText(code);
   setCopied(true);

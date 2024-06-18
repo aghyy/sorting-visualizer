@@ -60,7 +60,7 @@ const BubbleSort = ({ codeStyle }) => {
               onMouseEnter={() => setShowSpan(true)}
               onMouseLeave={() => { setShowSpan(false); setCopied(false); }}>
 
-              <button onClick={() => handleCopy(document.querySelector('code.language-python'))}>
+              <button onClick={() => handleCopy(setCopied, document.querySelector('code.language-python'))}>
                 <IoCopyOutline />
               </button>
               {showSpan && <span className='tooltip'>{copied ? 'Copied!' : 'Copy'}</span>}

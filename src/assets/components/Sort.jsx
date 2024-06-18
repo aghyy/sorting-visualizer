@@ -239,7 +239,7 @@ const Sort = ({ algorithm, inputArray }) => {
                     onChange={(e) => setDelay(parseInt(e.target.value))}
                     disabled={isRunning}
                 />
-                <p>Current Value: {delay}</p>
+                <p>Delay: {delay}ms</p>
             </div>
         </div>
     );

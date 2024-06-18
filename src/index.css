@@ -25,6 +25,15 @@ a:active {
     scrollbar-width: none;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+}
+
+p, span, div, h1, h2, h3, h4, h5, h6, ul, ol, li {
+    cursor: default;
 }
 
 ::-webkit-scrollbar {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Algorithm.css';
 import { bubbleSort, selectionSort, insertionSort, formatTime } from '../utils';
 import Sort from './Sort';
@@ -19,10 +19,18 @@ const Algorithm = ({ algorithmState, updateAlgorithmState }) => {
     keyVal,
   } = algorithmState;
 
+  const mouseDownFromPopupRef = useRef(false);
+
   useEffect(() => {
     const handleEnterKeyPress = (event) => {
       if (event.key === 'Enter') {
         handleSort();
+      }
+    };
+
+    const handleEscapeKeyPress = (event) => {
+      if (event.key === 'Escape') {
+        updateAlgorithmState({ displayAnimation: false });
       }
     };
 
@@ -31,12 +39,19 @@ const Algorithm = ({ algorithmState, updateAlgorithmState }) => {
       inputArrayElement.addEventListener('keypress', handleEnterKeyPress);
     }
 
+    if (displayAnimation) {
+      document.addEventListener('keydown', handleEscapeKeyPress);
+    }
+
     return () => {
       if (inputArrayElement) {
         inputArrayElement.removeEventListener('keypress', handleEnterKeyPress);
       }
+      if (displayAnimation) {
+        document.removeEventListener('keydown', handleEscapeKeyPress);
+      }
     };
-  }, [algorithm, inputArray, showAnimation, sortingSteps]);
+  }, [algorithm, inputArray, showAnimation, sortingSteps, displayAnimation]);
 
   const handleAlgorithmChange = (event) => {
     updateAlgorithmState({ algorithm: event.target.value });
@@ -93,6 +108,23 @@ const Algorithm = ({ algorithmState, updateAlgorithmState }) => {
     });
   };
 
+  const handleMouseDown = (event) => {
+    if (event.target === event.currentTarget) {
+      event.stopPropagation();
+      mouseDownFromPopupRef.current = true;
+    }
+  };
+
+  const handleMouseUp = (event) => {
+    if (event.target === event.currentTarget) {
+      event.stopPropagation();
+      if (mouseDownFromPopupRef.current) {
+        updateAlgorithmState({ displayAnimation: false });
+        mouseDownFromPopupRef.current = false;
+      }
+    }
+  };
+
   return (
     <div className="card-wrapper">
       <div className="card">
@@ -135,7 +167,11 @@ const Algorithm = ({ algorithmState, updateAlgorithmState }) => {
       )}
 
       {displayAnimation && (
-        <div className='sort-popup-background' onClick={(e) => { e.target === e.currentTarget && updateAlgorithmState({ displayAnimation: false }) }} >
+        <div
+          className='sort-popup-background'
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+        >
           <div className='sort-popup-content'>
             <div className="close-button">
               <IoCloseOutline onClick={() => updateAlgorithmState({ displayAnimation: false })} />
