@@ -17,14 +17,14 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
+    align-items: center;
 }
 
-nav ul li {
+nav > ul > li {
     margin: 0 15px;
 }
 
 nav ul li a {
-    text-decoration: none;
     color: #007bff;
     font-size: 18px;
     padding: 10px 15px;
@@ -32,7 +32,7 @@ nav ul li a {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-nav ul li a:hover {
+nav > ul > li > a:hover {
     background: #007bff;
     color: #fff;
 }
@@ -41,6 +41,44 @@ nav .logo {
     width: 40px;
     height: 40px;
     pointer-events: none;
+}
+
+.inner-nav-sort {
+    position: absolute;
+    top: 100%;
+    right: 35px;
+    background-color: #333;
+    padding: 0 20px;
+    border-radius: 15px;
+    border: 1px solid #686868;
+}
+
+.vertical-nav-line {
+    border-left: .5px solid #686868;
+    height: 75px;
+}
+
+.inner-nav-sort > li {
+    padding: 20px;
+}
+
+.inner-nav-a>p {
+    display: flex;
+    margin: 0;
+    cursor: pointer;
+}
+
+.nav-info-text {
+    color: #ffffff;
+    font-size: 12px;
+    width: 200px;
+    margin-top: 5px !important;
+}
+
+.sort-algorithm-a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 @media (prefers-color-scheme: dark) {
