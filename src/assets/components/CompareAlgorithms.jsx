@@ -261,7 +261,7 @@ const CompareAlgorithms = ({ algorithmState, updateAlgorithmState }) => {
                         <p>Delay: {delay}ms</p>
                     </div>
                     <div className="sort-card-controls-buttons">
-                        <button className='controller' onClick={previousStep} disabled={child1IsRunning || child2IsRunning}>
+                        <button className='controller' onClick={previousStep} disabled={child1IsRunning || child2IsRunning || (child1IsDone && child2IsDone)}>
                             <IoPlaySkipBack />
                         </button>
                         <button
@@ -276,7 +276,7 @@ const CompareAlgorithms = ({ algorithmState, updateAlgorithmState }) => {
                         >
                             {child1IsRunning || child2IsRunning ? <IoPause /> : ((child1IsDone && child2IsDone) ? <IoRefreshOutline /> : <IoPlay />)}
                         </button>
-                        <button className='controller' onClick={nextStep} disabled={child1IsRunning || child2IsRunning}>
+                        <button className='controller' onClick={nextStep} disabled={child1IsRunning || child2IsRunning || (child1IsDone && child2IsDone)}>
                             <IoPlaySkipForward />
                         </button>
                     </div>
