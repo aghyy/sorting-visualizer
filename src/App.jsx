@@ -120,12 +120,13 @@ function App() {
 
       <div className='fixed-footer'>
         <div className="left-footer">
-          <p>Supports Light/Dark Mode</p>
+          <p></p>
         </div>
         <div className="center-footer">
           <p>© 2024 • Built by Andreas</p>
         </div>
         <div className="right-footer"></div>
+        <p></p>
       </div>
     </>
   );
