@@ -5,10 +5,11 @@ import Algorithm from './assets/components/Algorithm';
 import InsertionSort from './assets/components/InsertionSort';
 import SelectionSort from './assets/components/SelectionSort';
 import BubbleSort from './assets/components/BubbleSort';
+import CompareAlgorithms from './assets/components/CompareAlgorithms';
 import { vscDarkPlus, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 function App() {
-  const [selectedOption, setSelectedOption] = useState('Algorithm');
+  const [selectedOption, setSelectedOption] = useState('RunAlgorithm');
   const appContainerRef = useRef(null);
   const [theme, setTheme] = useState('light');
   const codeStyle = theme === 'dark' ? vscDarkPlus : vs;
@@ -28,6 +29,24 @@ function App() {
 
   const updateAlgorithmState = (newState) => {
     setAlgorithmState((prevState) => ({
+      ...prevState,
+      ...newState
+    }));
+  };
+ 
+  const [compareAlgorithmState, setCompareAlgorithmState] = useState({
+    algorithm1: '',
+    algorithm2: '',
+    inputArray: '',
+    sortedArray: [],
+    fullAlgorithm1: '',
+    fullAlgorithm2: '',
+    inputtedArray: [],
+    keyVal: 0
+  });
+
+  const updateCompareAlgorithmState = (newState) => {
+    setCompareAlgorithmState((prevState) => ({
       ...prevState,
       ...newState
     }));
@@ -90,9 +109,10 @@ function App() {
       <NavBar setSelectedOption={setSelectedOption} />
 
       <div className="app-container" ref={appContainerRef}>
-        {selectedOption === 'Algorithm' &&
+        {selectedOption === 'RunAlgorithm' &&
           <Algorithm algorithmState={algorithmState} updateAlgorithmState={updateAlgorithmState} />
         }
+        {selectedOption === 'CompareAlgorithm' && <CompareAlgorithms algorithmState={compareAlgorithmState} updateAlgorithmState={updateCompareAlgorithmState} />}
         {selectedOption === 'InsertionSort' && <InsertionSort codeStyle={codeStyle} />}
         {selectedOption === 'SelectionSort' && <SelectionSort codeStyle={codeStyle} />}
         {selectedOption === 'BubbleSort' && <BubbleSort codeStyle={codeStyle} />}

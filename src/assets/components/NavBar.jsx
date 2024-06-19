@@ -37,7 +37,10 @@ const NavBar = ({ setSelectedOption }) => {
 
             <ul>
                 <li>
-                    <a href="#" onClick={() => setSelectedOption('Algorithm')}>Run Algorithm</a>
+                    <a href="#" onClick={() => setSelectedOption('RunAlgorithm')}>Run Algorithm</a>
+                </li>
+                <li>
+                    <a href="#" onClick={() => setSelectedOption('CompareAlgorithm')}>Compare Algorithms</a>
                 </li>
                 <li onMouseEnter={handleMouseEnterOuter} onMouseLeave={handleMouseLeaveOuter}>
                     <a className="sort-algorithm-a" href="#">

@@ -15,7 +15,7 @@
   max-width: 400px;
   width: 100%;
   margin: 20px;
-  overflow: hidden;
+  position: relative;
 }
 
 .card>label {
@@ -157,6 +157,26 @@
 
 .sort-popup-content .close-button svg:hover {
   color: #007bff;
+}
+
+.card .previous-arrays {
+  position: absolute;
+  z-index: 9999999;
+  width: calc(100% - 40px);
+  background-color: #333333;
+  max-height: 155px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.card .previous-array {
+  width: 100%;
+  background-color: transparent;
+  padding: 10px;
+}
+
+.card .previous-array:hover {
+  background-color: #444444;
 }
 
 @media only screen and (max-width: 1024px) {

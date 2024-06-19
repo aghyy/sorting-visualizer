@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useImperativeHandle, forwardRef } from 'react';
 import { BubbleSort, InsertionSort, SelectionSort } from '../algorithms';
 import { formatTime } from '../utils';
 import { IoPlay, IoPlaySkipBack, IoPlaySkipForward, IoRefreshOutline, IoPause } from "react-icons/io5";
@@ -11,7 +11,7 @@ const ALGORITHMS = {
     'Selection Sort': SelectionSort,
 };
 
-const Sort = ({ algorithm, inputArray }) => {
+const Sort = forwardRef(({ algorithm, inputArray, hideControls, setParentIsRunning, setChildIsDone }, ref) => {
     const [array, setArray] = useState([]);
     const [arraySteps, setArraySteps] = useState([]);
     const [colorKey, setColorKey] = useState([]);
@@ -122,6 +122,7 @@ const Sort = ({ algorithm, inputArray }) => {
     const start = () => {
         clearTimeouts();
         setIsRunning(true);
+        setChildIsDone && setChildIsDone(false);
         startTimer();
 
         let timeoutsArray = [];
@@ -134,6 +135,8 @@ const Sort = ({ algorithm, inputArray }) => {
                         setColorKey(colorSteps[newStep]);
                     } else {
                         setIsRunning(false);
+                        setParentIsRunning && setParentIsRunning(false);
+                        setChildIsDone && setChildIsDone(true);
                         stopTimer();
                     }
                     return newStep;
@@ -151,6 +154,10 @@ const Sort = ({ algorithm, inputArray }) => {
         stopTimer();
     };
 
+    const restart = () => {
+        inputArray && inputArray.length > 0 ? generateInputArray() : generateRandomArray()
+    };
+
     let bars = array.map((value, index) => (
         <Bar
             key={index}
@@ -165,7 +172,7 @@ const Sort = ({ algorithm, inputArray }) => {
 
     if (arraySteps.length === currentStep) {
         playButton = (
-            <button className='controller' onClick={() => { inputArray && inputArray.length > 0 ? generateInputArray() : generateRandomArray() }} disabled={isRunning}>
+            <button className='controller' onClick={restart} disabled={isRunning}>
                 <IoRefreshOutline />
             </button>
         );
@@ -210,6 +217,15 @@ const Sort = ({ algorithm, inputArray }) => {
         setTimer(0);
     }
 
+    useImperativeHandle(ref, () => ({
+        start,
+        pause,
+        setDelay,
+        restart,
+        previousStep,
+        nextStep,
+    }));
+
     return (
         <div className='sort-card'>
             <div className="timer">
@@ -218,31 +234,37 @@ const Sort = ({ algorithm, inputArray }) => {
             <div className='sort-card-frame'>
                 <div className='sort-bar-div sort-bar-container sort-bar-card'>{bars}</div>
             </div>
-            <div className='sort-card-controls'>
-                <div className='sort-card-controls-buttons'>
-                    <button className='controller' onClick={previousStep} disabled={isRunning}>
-                        <IoPlaySkipBack />
-                    </button>
-                    {playButton}
-                    <button className='controller' onClick={nextStep} disabled={isRunning}>
-                        <IoPlaySkipForward />
-                    </button>
-                </div>
-            </div>
-            <div className="delay-control">
-                <input
-                    type="range"
-                    min="100"
-                    max="1000"
-                    step="100"
-                    defaultValue={delay}
-                    onChange={(e) => setDelay(parseInt(e.target.value))}
-                    disabled={isRunning}
-                />
-                <p>Delay: {delay}ms</p>
-            </div>
+            {
+                !hideControls && (
+                    <div>
+                        <div className='sort-card-controls'>
+                            <div className='sort-card-controls-buttons'>
+                                <button className='controller' onClick={previousStep} disabled={isRunning}>
+                                    <IoPlaySkipBack />
+                                </button>
+                                {playButton}
+                                <button className='controller' onClick={nextStep} disabled={isRunning}>
+                                    <IoPlaySkipForward />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="delay-control">
+                            <input
+                                type="range"
+                                min="100"
+                                max="1000"
+                                step="100"
+                                defaultValue={delay}
+                                onChange={(e) => setDelay(parseInt(e.target.value))}
+                                disabled={isRunning}
+                            />
+                            <p>Delay: {delay}ms</p>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     );
-};
+});
 
 export default Sort;
