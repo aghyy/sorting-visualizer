@@ -163,7 +163,7 @@
   position: absolute;
   z-index: 9999999;
   width: calc(100% - 40px);
-  background-color: #333333;
+  background-color: #eee;
   max-height: 155px;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -176,7 +176,7 @@
 }
 
 .card .previous-array:hover {
-  background-color: #444444;
+  background-color: #d1d1d1;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -236,5 +236,13 @@
 
   .sort-popup-content .close-button svg:hover {
     color: #007bff;
+  }
+
+  .card .previous-arrays {
+    background-color: #333333;
+  }
+
+  .card .previous-array:hover {
+    background-color: #444444;
   }
 }
