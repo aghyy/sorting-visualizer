@@ -19,7 +19,7 @@
     position: relative;
 }
 
-.compare-algorithms-card>label {
+.compare-algorithms-card label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;

@@ -7,6 +7,8 @@ import SelectionSort from './assets/components/SelectionSort';
 import BubbleSort from './assets/components/BubbleSort';
 import CompareAlgorithms from './assets/components/CompareAlgorithms';
 import { vscDarkPlus, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import ParticlesBackground from './assets/components/ParticlesBackground';
+
 
 function App() {
   const [selectedOption, setSelectedOption] = useState('RunAlgorithm');
@@ -33,7 +35,7 @@ function App() {
       ...newState
     }));
   };
- 
+
   const [compareAlgorithmState, setCompareAlgorithmState] = useState({
     algorithm1: '',
     algorithm2: '',
@@ -109,6 +111,7 @@ function App() {
       <NavBar setSelectedOption={setSelectedOption} />
 
       <div className="app-container" ref={appContainerRef}>
+        <ParticlesBackground />
         {selectedOption === 'RunAlgorithm' &&
           <Algorithm algorithmState={algorithmState} updateAlgorithmState={updateAlgorithmState} />
         }
