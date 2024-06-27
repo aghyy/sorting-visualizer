@@ -111,7 +111,7 @@ function App() {
       <NavBar setSelectedOption={setSelectedOption} />
 
       <div className="app-container" ref={appContainerRef}>
-        <ParticlesBackground />
+        <ParticlesBackground theme={theme} />
         {selectedOption === 'RunAlgorithm' &&
           <Algorithm algorithmState={algorithmState} updateAlgorithmState={updateAlgorithmState} />
         }

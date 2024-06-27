@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 
-const ParticlesBackground = () => {
+const ParticlesBackground = ({ theme }) => {
+    const [particlesColor, setParticlesColor] = useState('#ffffff');
+    const [shapeStrokeColor, setShapeStrokeColor] = useState('#000000');
+
     const particlesInit = async (main) => {
         await loadFull(main);
     };
@@ -10,6 +13,11 @@ const ParticlesBackground = () => {
     const particlesLoaded = (container) => {
         console.log(container);
     };
+
+    useEffect(() => {
+        setParticlesColor(theme === 'dark' ? '#ffffff' : '#000000');
+        setShapeStrokeColor(theme === 'dark' ? '#000000' : '#ffffff');
+    }, [theme]);
 
     return (
         <Particles
@@ -26,13 +34,13 @@ const ParticlesBackground = () => {
                         }
                     },
                     color: {
-                        value: "#ffffff"
+                        value: particlesColor
                     },
                     shape: {
                         type: "circle",
                         stroke: {
                             width: 0,
-                            color: "#000000"
+                            color: shapeStrokeColor
                         },
                         polygon: {
                             nb_sides: 5
@@ -66,7 +74,7 @@ const ParticlesBackground = () => {
                     line_linked: {
                         enable: true,
                         distance: 150,
-                        color: "#ffffff",
+                        color: particlesColor,
                         opacity: 0.4,
                         width: 1
                     },
