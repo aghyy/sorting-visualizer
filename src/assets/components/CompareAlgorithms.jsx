@@ -227,7 +227,7 @@ const CompareAlgorithms = ({ algorithmState, updateAlgorithmState }) => {
             </div>
 
             {fullAlgorithm1 && fullAlgorithm2 && inputArray && inputArray.length > 0 && sortedArray && sortedArray.length > 0 && (
-                <div>
+                <div className='sort-anim-outer-wrapper'>
                     <div className='sort-anim-wrapper'>
                         <Sort
                             ref={sortRefs[0]}

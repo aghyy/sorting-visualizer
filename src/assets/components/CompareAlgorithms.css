@@ -118,6 +118,11 @@
     background-color: #d1d1d1;
 }
 
+.sort-anim-outer-wrapper {
+    z-index: 999;
+    pointer-events: none;
+}
+
 .sort-anim-wrapper {
     display: flex;
 }

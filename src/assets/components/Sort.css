@@ -1,3 +1,8 @@
+.sort-card {
+	z-index: 999;
+    pointer-events: none;
+}
+
 .sort-card-frame {
 	margin: 0;
 	display: flex;
@@ -41,6 +46,7 @@
 	align-items: center;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	pointer-events: auto;
 }
 
 .sort-card-controls {
@@ -78,6 +84,7 @@
 	margin: 10px 0;
 	width: 100%;
 	background-color: transparent;
+	pointer-events: auto;
 }
 
 .delay-control input[type=range]:disabled {
