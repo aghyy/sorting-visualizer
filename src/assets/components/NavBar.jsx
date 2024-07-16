@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './NavBar.css';
-import { IoCaretDownOutline } from "react-icons/io5";
+import { IoCaretDownOutline, IoInformationCircleOutline } from "react-icons/io5";
 import Logo from './Logo';
 import ToggleSwitch from './ToggleSwitch';
 import { handleAnimatedBg } from '../utils';
@@ -139,7 +139,13 @@ const NavBar = ({ setSelectedOption, setBgKey, currentContainer, isBackgroundAni
                                 <ToggleSwitch isChecked={isDotted} setIsChecked={() => { setIsDotted(!isDotted) }} />
                             </div>
                             <div>
-                                <p>2D/3D</p>
+                                <div className='option-text'>
+                                    <p>2D/3D</p>
+                                    <IoInformationCircleOutline />
+                                    <div className='dim-info-tooltip'>
+                                        <p>If the array has more than 15 elements or any element exceeds 200, 2D will be enabled automatically.</p>
+                                    </div>
+                                </div>
                                 <ToggleSwitch isChecked={is2D} setIsChecked={handleDimensionChange} />
                             </div>
                         </div>

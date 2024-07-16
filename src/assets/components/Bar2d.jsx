@@ -40,6 +40,11 @@ const Bar2d = memo(({ value, color, barHeight, length, index }) => {
         flexDirection: 'column',
         gap: '5px',
         width: `calc((100% - ((${length - 1}) * .15em)) / ${length})`,
+        position: 'relative',
+    };
+
+    const tooltipStyle = {
+        bottom: `calc(${barHeight}% + 25px)`,
     };
 
     return (
@@ -47,6 +52,7 @@ const Bar2d = memo(({ value, color, barHeight, length, index }) => {
             <div className='bar-2d'>
                 <div style={barStyle}></div>
             </div>
+            <div className="bar-tooltip" style={tooltipStyle}>{value}</div>
             <div className='bar-2d-value' style={barValueStyle}>
                 {value}
             </div>

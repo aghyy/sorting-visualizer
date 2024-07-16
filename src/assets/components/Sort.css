@@ -242,7 +242,7 @@ input[type=range]:focus::-ms-fill-upper {
 	display: none;
 }
 
-.shuffle-btn:hover+.shuffle-tooltip {
+.shuffle-btn:not(:disabled):hover+.shuffle-tooltip {
 	display: block;
 	position: absolute;
 	background-color: #d1d1d1;

@@ -12,6 +12,42 @@
 	position: relative;
 }
 
+.bar-tooltip {
+	display: none;
+	position: absolute;
+	background-color: #f2f2f2;
+	border: 1px solid #d1d1d1;
+	padding: 10px 15px 8px;
+	border-radius: 0.3em;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 1;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	pointer-events: none;
+}
+
+.bar-tooltip::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #d1d1d1 transparent transparent transparent;
+}
+
+.bar-2d:hover + .bar-tooltip {
+	display: flex;
+}
+
+.bar-2d:hover > div {
+	transform: scale(1.02);
+	background-color: rgb(24, 158, 131) !important;
+}
+
 .bar-2d .hidden-value {
 	display: none;
 }
@@ -89,4 +125,15 @@ input[type='number']::-webkit-outer-spin-button {
 
 input[type='number'] {
     -moz-appearance: textfield;
+}
+
+@media (prefers-color-scheme: dark) {
+    .bar-tooltip {
+		background-color: #131313;
+		border: 1px solid #2c2c2c;
+	}
+
+	.bar-tooltip::after {
+		border-color: #2c2c2c transparent transparent transparent;
+	}
 }
