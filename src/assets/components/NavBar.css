@@ -20,7 +20,7 @@ nav ul {
     align-items: center;
 }
 
-nav > ul > li {
+nav>ul>li {
     margin: 0 15px;
 }
 
@@ -32,33 +32,33 @@ nav ul li a {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-nav > ul > li > a:hover {
+nav>ul>li>a:hover {
     background: #007bff;
     color: #fff;
 }
 
 nav .logo {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     pointer-events: none;
+    color: #000;
 }
 
 .inner-nav-sort {
     position: absolute;
     top: 100%;
     right: 35px;
-    background-color: #333;
-    padding: 0 20px;
+    background-color: #fff;
     border-radius: 15px;
-    border: 1px solid #686868;
+    border: 1px solid #ddd;
 }
 
 .vertical-nav-line {
-    border-left: .5px solid #686868;
-    height: 75px;
+    border-left: .5px solid #ddd;
+    height: 55px;
 }
 
-.inner-nav-sort > li {
+.inner-nav-sort>li {
     padding: 20px;
 }
 
@@ -69,7 +69,6 @@ nav .logo {
 }
 
 .nav-info-text {
-    color: #ffffff;
     font-size: 12px;
     width: 200px;
     margin-top: 5px !important;
@@ -81,14 +80,49 @@ nav .logo {
     gap: 10px;
 }
 
+.nav-options{
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-options>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.nav-options>div>p {
+    margin: 0;
+}
+
 @media (prefers-color-scheme: dark) {
     nav {
         background: #1e1e1e;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        color: #ffffff;
+        color: #fff;
     }
 
     nav ul li a {
-        color: #ffffff;
+        color: #fff;
+    }
+
+    nav .logo {
+        color: #fff;
+    }
+
+    .inner-nav-sort {
+        background-color: #222;
+        border: 1px solid #686868;
+    }
+
+    .vertical-nav-line {
+        border-left: .5px solid #686868;
+    }
+
+    .nav-info-text {
+        color: #fff;
     }
 }

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ToggleSwitch from './ToggleSwitch';
-import { bubbleSort, selectionSort, insertionSort } from '../utils';
+import { bubbleSort, selectionSort, insertionSort, removeStringFromArray } from '../utils';
 import './Algorithm.css';
 
 const AlgorithmSelectionCard = ({ updateAlgorithmState, algorithmState }) => {
@@ -18,11 +18,12 @@ const AlgorithmSelectionCard = ({ updateAlgorithmState, algorithmState }) => {
     const [previousArrays, setPreviousArrays] = useState([]);
     const [isInputActive, setIsInputActive] = useState(false);
     const inputArrayElem = useRef(null);
+    const [shouldSort, setShouldSort] = useState(false);
 
     useEffect(() => {
         const handleEnterKeyPress = (event) => {
             if (event.key === 'Enter') {
-                handleSort();
+                setShouldSort(true);
             }
         };
 
@@ -43,8 +44,18 @@ const AlgorithmSelectionCard = ({ updateAlgorithmState, algorithmState }) => {
         };
     }, [algorithm, inputArray, showAnimation, sortingSteps, displayAnimation]);
 
+    useEffect(() => {
+        if (shouldSort) {
+            handleSort();
+            setShouldSort(false);
+        }
+    }, [shouldSort, algorithm, inputArray]);
+
     const handleAlgorithmChange = (event) => {
         updateAlgorithmState({ algorithm: event.target.value });
+        const array = inputArray.split(',').map((num) => parseInt(num.trim()));
+        if (array.some(isNaN) || array.length < 2) return;
+        setShouldSort(true);
     };
 
     const handleInputChange = (event) => {
@@ -70,6 +81,9 @@ const AlgorithmSelectionCard = ({ updateAlgorithmState, algorithmState }) => {
             return;
         } else if (array.some(isNaN)) {
             alert('Invalid input. Please enter a valid array of numbers.');
+            return;
+        } else if (array.length < 2) {
+            alert('Array must have at least 2 elements.');
             return;
         }
 
@@ -99,15 +113,16 @@ const AlgorithmSelectionCard = ({ updateAlgorithmState, algorithmState }) => {
 
         inputArrayElem.current.blur();
 
-        const updatedPreviousArrays = [inputArray, ...previousArrays];
-        if (!previousArrays.includes(inputArray)) {
-            localStorage.setItem('previousArrays', JSON.stringify(updatedPreviousArrays));
-            setPreviousArrays(updatedPreviousArrays);
-        }
+        const updatedPreviousArrays = [inputArray, ...removeStringFromArray(previousArrays, inputArray)];
+        localStorage.setItem('previousArrays', JSON.stringify(updatedPreviousArrays));
+        setPreviousArrays(updatedPreviousArrays);
     };
 
     const handlePreviousArrayClick = (array) => {
         updateAlgorithmState({ inputArray: array });
+        if (algorithm) {
+            setShouldSort(true);
+        }
     };
 
     const handleInputFocus = () => {
@@ -156,9 +171,14 @@ const AlgorithmSelectionCard = ({ updateAlgorithmState, algorithmState }) => {
             </div>
             <button onClick={handleSort}>Sort</button>
             <button onClick={handleShowAnimation}>Show animation</button>
+
             {sortedArray && sortedArray.length > 0 && (
-                <p>Sorted Array: {sortedArray.join(', ')}</p>
+                <div>
+                    <p>Array length: {sortedArray.length}</p>
+                    <p>Sorted Array: {sortedArray.join(', ')}</p>
+                </div>
             )}
+            {sortingSteps && sortingSteps.length > 0 && <p>Steps needed: {sortingSteps.length}</p>}
         </div>
     );
 };

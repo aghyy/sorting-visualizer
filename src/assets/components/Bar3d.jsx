@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Bar.css';
 
-function Bar({ index, length, color, changeArray }) {
+function Bar3d({ index, length, color, changeArray }) {
 	const [len, setLen] = useState(length);
 
 	useEffect(() => {
@@ -71,21 +71,25 @@ function Bar({ index, length, color, changeArray }) {
 
 	return (
 		<>
-			<div className='bar'>
+			<div className={'bar bar-3d'}>
 				<div className='side top'></div>
 				<div className='side bottom' style={bottom}></div>
+
 				<div className='side right'>
 					<div
 						className='color-bar right-color-bar'
 						style={front_back_right_left}
 					></div>
 				</div>
+
 				<div className='side left'>
 					<div
 						className='color-bar left-color-bar'
 						style={front_back_right_left}
 					></div>
 				</div>
+
+
 				<div className='side front'>
 					<div
 						className='color-bar front-color-bar'
@@ -102,12 +106,14 @@ function Bar({ index, length, color, changeArray }) {
 						/>
 					</div>
 				</div>
+
 				<div className='side back'>
 					<div
 						className='color-bar back-color-bar'
 						style={front_back_right_left}
 					></div>
 				</div>
+
 				<div className='quantity-nav'>
 					<div
 						className='quantity-button quantity-up'
@@ -129,4 +135,4 @@ function Bar({ index, length, color, changeArray }) {
 	);
 }
 
-export default Bar;
+export default Bar3d;

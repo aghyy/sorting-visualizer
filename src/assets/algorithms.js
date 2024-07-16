@@ -2,11 +2,16 @@ import { swap } from './utils';
 
 export const BubbleSort = (array, position, arraySteps, colorSteps) => {
     let colorKey = colorSteps[colorSteps.length - 1].slice();
+    let swapped;
 
     for (let i = 0; i < array.length - 1; i++) {
+        swapped = false;
         for (let j = 0; j < array.length - i - 1; j++) {
             if (array[j] > array[j + 1]) {
-                array = swap(array, j, j + 1);
+                let temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+                swapped = true;
             }
             arraySteps.push(array.slice());
             colorKey[j] = 1;
@@ -15,9 +20,11 @@ export const BubbleSort = (array, position, arraySteps, colorSteps) => {
             colorKey[j] = 0;
             colorKey[j + 1] = 0;
         }
-        colorKey[arraySteps.length - 1 - i] = 2;
+        colorKey[array.length - 1 - i] = 2;
         arraySteps.push(array.slice());
         colorSteps.push(colorKey.slice());
+
+        if (!swapped) break;
     }
     colorSteps[colorSteps.length - 1] = new Array(array.length).fill(2);
     return;

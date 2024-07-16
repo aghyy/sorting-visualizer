@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 
-const ParticlesBackground = ({ theme }) => {
+const ParticlesBackground = ({ theme, bgKey, setCurrentContainer }) => {
     const [particlesColor, setParticlesColor] = useState('#ffffff');
     const [shapeStrokeColor, setShapeStrokeColor] = useState('#000000');
 
@@ -11,16 +11,19 @@ const ParticlesBackground = ({ theme }) => {
     };
 
     const particlesLoaded = (container) => {
+        setCurrentContainer(container);
+        document.querySelector('#tsparticles>canvas').style.pointerEvents = 'none';
         console.log(container);
     };
 
     useEffect(() => {
-        setParticlesColor(theme === 'dark' ? '#ffffff' : '#000000');
-        setShapeStrokeColor(theme === 'dark' ? '#000000' : '#ffffff');
+        setParticlesColor(theme === 'dark' ? '#ccc' : '#000');
+        setShapeStrokeColor(theme === 'dark' ? '#000' : '#ccc');
     }, [theme]);
 
     return (
         <Particles
+            key={bgKey}
             id="tsparticles"
             init={particlesInit}
             loaded={particlesLoaded}
@@ -97,11 +100,11 @@ const ParticlesBackground = ({ theme }) => {
                     detect_on: "canvas",
                     events: {
                         onhover: {
-                            enable: true,
+                            enable: false,
                             mode: "repulse"
                         },
                         onclick: {
-                            enable: true,
+                            enable: false,
                             mode: "push"
                         },
                         resize: true

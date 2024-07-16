@@ -4,6 +4,16 @@
     align-items: center;
     flex-direction: column;
     margin: 20px 0;
+    gap: 20px;
+}
+
+.sort-container-cards.insertion-sort-ovw .sort-card {
+    max-width: calc(100% - 346px);
+}
+
+.sort-container-cards.bubble-sort-ovw .sort-card,
+.sort-container-cards.selection-sort-ovw .sort-card {
+    max-width: calc(100% - 432px);
 }
 
 .sort-container h2 {
@@ -32,6 +42,7 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 15px 25px;
+    cursor: pointer;
 }
 
 .sort-container-card-content,
@@ -83,8 +94,9 @@
 .sort-container-cards {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 20px;
+    width: 100%;
 }
 
 .sort-container-vertical {
@@ -125,6 +137,12 @@
 
 .MathJax {
     font-size: 16px !important;
+}
+
+.sort-container-card .collapse-card {
+    position: absolute;
+    top: 15px;
+    right: 25px;
 }
 
 @media (prefers-color-scheme: dark) {

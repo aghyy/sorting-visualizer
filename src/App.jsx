@@ -8,13 +8,16 @@ import BubbleSort from './assets/components/BubbleSort';
 import CompareAlgorithms from './assets/components/CompareAlgorithms';
 import { vscDarkPlus, vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ParticlesBackground from './assets/components/ParticlesBackground';
-
+import Footer from './assets/components/Footer';
 
 function App() {
   const [selectedOption, setSelectedOption] = useState('RunAlgorithm');
   const appContainerRef = useRef(null);
   const [theme, setTheme] = useState('light');
   const codeStyle = theme === 'dark' ? vscDarkPlus : vs;
+  const [bgKey, setBgKey] = useState(1);
+  const [currentContainer, setCurrentContainer] = useState(null);
+  const [isBackgroundAnimated, setIsBackgroundAnimated] = useState(true);
 
   const [algorithmState, setAlgorithmState] = useState({
     algorithm: '',
@@ -25,7 +28,7 @@ function App() {
     displayAnimation: false,
     fullAlgorithm: '',
     inputtedArray: [],
-    displaySteps: false,
+    displaySteps: true,
     keyVal: 0
   });
 
@@ -53,6 +56,14 @@ function App() {
       ...newState
     }));
   };
+
+  useEffect(() => {
+    if (window.localStorage.getItem('animatedBg') === 'false') {
+      document.body.classList.add('body-bg');
+      setBgKey(0);
+      setIsBackgroundAnimated(false);
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -108,10 +119,16 @@ function App() {
 
   return (
     <>
-      <NavBar setSelectedOption={setSelectedOption} />
+      <NavBar
+        setSelectedOption={setSelectedOption}
+        setBgKey={setBgKey}
+        currentContainer={currentContainer}
+        isBackgroundAnimated={isBackgroundAnimated}
+        setIsBackgroundAnimated={setIsBackgroundAnimated}
+      />
 
       <div className="app-container" ref={appContainerRef}>
-        <ParticlesBackground theme={theme} />
+        {bgKey && bgKey > 0 ? <ParticlesBackground theme={theme} key={bgKey} setCurrentContainer={setCurrentContainer} /> : null}
         {selectedOption === 'RunAlgorithm' &&
           <Algorithm algorithmState={algorithmState} updateAlgorithmState={updateAlgorithmState} />
         }
@@ -121,16 +138,7 @@ function App() {
         {selectedOption === 'BubbleSort' && <BubbleSort codeStyle={codeStyle} />}
       </div>
 
-      <div className='fixed-footer'>
-        <div className="left-footer">
-          <p></p>
-        </div>
-        <div className="center-footer">
-          <p>© 2024 • Built by Andreas</p>
-        </div>
-        <div className="right-footer"></div>
-        <p></p>
-      </div>
+      <Footer />
     </>
   );
 }

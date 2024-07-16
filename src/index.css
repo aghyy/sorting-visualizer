@@ -1,9 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
-    /* background-image: radial-gradient(#000 0.5px, transparent 0.5px), radial-gradient(#000 0.5px, #f4f4f9 0.5px);
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px; */
     color: #333;
     display: flex;
     justify-content: center;
@@ -11,6 +8,16 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden;
+}
+
+body.dotted {
+    background-image: radial-gradient(#000 0.5px, transparent 0.5px), radial-gradient(#000 0.5px, #f4f4f9 0.5px);
+}
+
+.body-bg {
+    background-color: #f4f4f9;
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
 }
 
 a:link,
@@ -32,12 +39,12 @@ a:active {
     -o-user-select: none;
 }
 
-p, span, div, h1, h2, h3, h4, h5, h6, ul, ol, li {
-    cursor: default;
-}
-
 ::-webkit-scrollbar {
     display: none;
+}
+
+p, span, div, h1, h2, h3, h4, h5, h6, ul, ol, li {
+    cursor: default;
 }
 
 #particles-js {
@@ -57,7 +64,14 @@ p, span, div, h1, h2, h3, h4, h5, h6, ul, ol, li {
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #121212;
-        /* background-image: radial-gradient(#333 0.5px, transparent 0.5px), radial-gradient(#333 0.5px, #121212 0.5px); */
-        color: #ffffff;
+        color: #fff;
+    }
+
+    .body-bg {
+        background-color: #121212;
+    }
+
+    body.dotted {
+        background-image: radial-gradient(#333 0.5px, transparent 0.5px), radial-gradient(#333 0.5px, #121212 0.5px);
     }
 }

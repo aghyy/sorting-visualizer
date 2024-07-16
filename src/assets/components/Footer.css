@@ -1,0 +1,33 @@
+.fixed-footer {
+    font-size: 11px;
+}
+
+.left-footer {
+    position: fixed;
+    bottom: 0;
+    left: 20px;
+    width: calc((100% - 80px) / 3);
+    display: flex;
+    justify-content: space-between;
+}
+
+.center-footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc((100% - 80px) / 3);
+    text-align: center;
+}
+
+.right-footer {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    width: calc((100% - 80px) / 3);
+    text-align: right;
+}
+
+.fixed-footer label.switch {
+    transform: scale(0.8);
+}

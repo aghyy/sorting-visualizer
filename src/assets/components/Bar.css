@@ -1,4 +1,4 @@
-.bar {
+.bar-3d {
 	height: 200px;
 	width: 2em;
 	margin-right: 2em;
@@ -6,39 +6,61 @@
 	transform: rotateX(-20deg) rotateY(-30deg);
 }
 
+.bar-2d {
+	height: 200px;
+	width: 100%;
+	position: relative;
+}
+
+.bar-2d .hidden-value {
+	display: none;
+}
+
 .bar:last-of-type {
 	margin-right: 0;
 }
 
-.side {
+.bar-2d-wrapper {
+	margin-right: .15em;
+}
+
+.bar-2d-wrapper:last-of-type {
+	margin-right: 0;
+}
+
+.bar-2d-wrapper:last-of-type .bar-2d-value {
+	width: 100%;
+}
+
+.bar-3d .side {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	background: rgba(100, 100, 100, 0.25);
 }
 
-.back {
+.bar-3d .back {
 	transform: translateZ(-4px);
 }
 
-.left {
+.bar-3d .left {
 	transform-origin: left;
 	transform: rotateY(90deg);
 }
 
-.right {
+.bar-3d .right {
 	transform-origin: right;
 	transform: rotateY(-90deg);
 }
 
-.top {
+.bar-3d .top {
 	height: 34px;
 	transform-origin: top;
 	transform: rotateX(-90deg);
 	background: rgba(100, 100, 100, 0.15);
 }
 
-.bottom {
+.bar-3d .bottom {
 	height: 34px;
 	transform-origin: top;
 	transition: 0.3s;

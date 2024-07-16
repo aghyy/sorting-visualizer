@@ -18,6 +18,7 @@ export const selectionSort = (array) => {
   for (let i = 0; i < array.length - 1; i++) {
     let minIndex = i
     for (let j = i + 1; j < array.length; j++) {
+      steps.push([...array])
       if (array[j] < array[minIndex]) {
         minIndex = j
       }
@@ -39,6 +40,7 @@ export const insertionSort = (array) => {
     while (j >= 0 && array[j] > key) {
       array[j + 1] = array[j]
       j--
+      steps.push([...array])
     }
     array[j + 1] = key
     steps.push([...array])
@@ -71,4 +73,32 @@ export const handleCopy = (setCopied, codeElement) => {
   setTimeout(() => {
     setCopied(false);
   }, 2000);
+}
+
+const unloadParticles = (particlesContainer, setBgKey) => {
+  if (particlesContainer && particlesContainer.particles) {
+    particlesContainer.particles.destroy();
+    setBgKey(0);
+  }
+};
+
+export const loadParticles = (setKey) => {
+  setKey(prevKey => prevKey + 1);
+};
+
+export const handleAnimatedBg = (isChecked, setIsChecked, setBgKey, currentContainer) => {
+  if (isChecked) {
+    window.localStorage.setItem('animatedBg', 'false');
+    document.body.classList.add('body-bg');
+    unloadParticles(currentContainer, setBgKey);
+  } else {
+    window.localStorage.setItem('animatedBg', 'true');
+    document.body.classList.remove('body-bg');
+    loadParticles(setBgKey);
+  }
+  setIsChecked(!isChecked);
+}
+
+export const removeStringFromArray = (arr, str) => {
+  return arr.filter(item => item !== str);
 }

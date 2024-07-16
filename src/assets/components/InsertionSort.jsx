@@ -2,59 +2,23 @@ import React, { useState, useEffect } from 'react';
 import Sort from './Sort';
 import './SortContainer.css';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { IoCopyOutline } from "react-icons/io5";
+import { IoCopyOutline, IoChevronDownOutline, IoChevronUpOutline } from "react-icons/io5";
 import { MathJax, MathJaxContext } from 'better-react-mathjax';
 import { handleCopy } from '../utils';
 
 const InsertionSort = ({ codeStyle }) => {
   const [copied, setCopied] = useState(false);
   const [showSpan, setShowSpan] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
+
+  useEffect(() => {
+    document.querySelector('.sort-container-card-content').scrollIntoView({ behavior: 'smooth' });
+  }, [showInfo]);
 
   return (
     <div className='sort-container'>
-      <h2>Insertion Sort</h2>
-      <Sort algorithm={'Insertion Sort'} />
-      <div className="sort-container-cards">
-        <div className='sort-container-card'>
-          <h4>Overview</h4>
-          <div className="sort-container-card-content">
-            <MathJaxContext>
-              <p>Insertion sort is a fundamental sorting algorithm that efficiently sorts small or nearly sorted datasets. It operates by iteratively inserting each element from an unsorted list into its correct position within a sorted portion of the list. This methodical approach makes insertion sort straightforward and effective for sorting small arrays or arrays with few elements out of order.</p>
-
-              <p><strong>Key Characteristics:</strong></p>
-              <ul>
-                <li><strong>Stability:</strong> Insertion sort is stable, meaning it preserves the relative order of equal elements in the sorted output.</li>
-                <li><strong>In-place:</strong> It operates directly on the input array, requiring only a constant amount of additional space for temporary variables.</li>
-              </ul>
-
-              <p><strong>Analogy to Playing Cards:</strong></p>
-              <p>Imagine holding a hand of playing cards. You start with one card (the first element) and gradually insert each subsequent card (element) into its correct position among the already sorted cards. This method mimics how insertion sort builds the sorted array step-by-step.</p>
-
-              <p><strong>Insertion Sort Algorithm:</strong></p>
-              <p>To implement insertion sort:</p>
-              <ol>
-                <li>Begin with the second element of the array, as the first element is inherently sorted.</li>
-                <li>Compare each element with the preceding elements in the sorted section of the array.</li>
-                <li>If an element is smaller, shift the larger elements one position to the right to make space for the current element.</li>
-                <li>Insert the element into its correct position.</li>
-                <li>Repeat until all elements are sorted.</li>
-              </ol>
-
-              <p><strong>Example:</strong></p>
-              <p>Consider sorting an array [5, 2, 1, 9, 6] using insertion sort:</p>
-              <ul>
-                <li>Start with [5] (first element is trivially sorted).</li>
-                <li>Insert 2 into its correct position: [2, 5].</li>
-                <li>Insert 1 into its correct position: [1, 2, 5].</li>
-                <li>Insert 9 into its correct position: [1, 2, 5, 9].</li>
-                <li>Insert 6 into its correct position: [1, 2, 5, 6, 9].</li>
-              </ul>
-              <p>Array is now sorted.</p>
-
-              <p className='inline-math'>Insertion sort is efficient for small datasets or arrays that are already nearly sorted. While its average and worst-case time complexity is <MathJax>{"\\(O(n^2)\\)"}</MathJax>, its simplicity and low overhead make it an attractive choice for certain scenarios where other algorithms might be more complex or unnecessary.</p>
-            </MathJaxContext>
-          </div>
-        </div>
+      <div className="sort-container-cards insertion-sort-ovw">
+        <Sort algorithm={'Insertion Sort'} key={'insertionsort-1'} />
 
         <div className="sort-container-vertical">
           <div className='sort-container-card'>
@@ -105,6 +69,57 @@ print(arr)`}
             </div>
           </div>
         </div>
+      </div>
+
+      <div className='sort-container-card'>
+        <div className="collapse-card">
+          {showInfo ? <IoChevronUpOutline /> : <IoChevronDownOutline />}
+        </div>
+        <h4
+          style={{ borderBottomLeftRadius: showInfo ? 0 : '10px', borderBottomRightRadius: showInfo ? 0 : '10px' }}
+          onClick={() => { setShowInfo(!showInfo) }}
+        >
+          Information
+        </h4>
+        {showInfo &&
+          <div className="sort-container-card-content">
+            <MathJaxContext>
+              <p>Insertion sort is a fundamental sorting algorithm that efficiently sorts small or nearly sorted datasets. It operates by iteratively inserting each element from an unsorted list into its correct position within a sorted portion of the list. This methodical approach makes insertion sort straightforward and effective for sorting small arrays or arrays with few elements out of order.</p>
+
+              <p><strong>Key Characteristics:</strong></p>
+              <ul>
+                <li><strong>Stability:</strong> Insertion sort is stable, meaning it preserves the relative order of equal elements in the sorted output.</li>
+                <li><strong>In-place:</strong> It operates directly on the input array, requiring only a constant amount of additional space for temporary variables.</li>
+              </ul>
+
+              <p><strong>Analogy to Playing Cards:</strong></p>
+              <p>Imagine holding a hand of playing cards. You start with one card (the first element) and gradually insert each subsequent card (element) into its correct position among the already sorted cards. This method mimics how insertion sort builds the sorted array step-by-step.</p>
+
+              <p><strong>Insertion Sort Algorithm:</strong></p>
+              <p>To implement insertion sort:</p>
+              <ol>
+                <li>Begin with the second element of the array, as the first element is inherently sorted.</li>
+                <li>Compare each element with the preceding elements in the sorted section of the array.</li>
+                <li>If an element is smaller, shift the larger elements one position to the right to make space for the current element.</li>
+                <li>Insert the element into its correct position.</li>
+                <li>Repeat until all elements are sorted.</li>
+              </ol>
+
+              <p><strong>Example:</strong></p>
+              <p>Consider sorting an array [5, 2, 1, 9, 6] using insertion sort:</p>
+              <ul>
+                <li>Start with [5] (first element is trivially sorted).</li>
+                <li>Insert 2 into its correct position: [2, 5].</li>
+                <li>Insert 1 into its correct position: [1, 2, 5].</li>
+                <li>Insert 9 into its correct position: [1, 2, 5, 9].</li>
+                <li>Insert 6 into its correct position: [1, 2, 5, 6, 9].</li>
+              </ul>
+              <p>Array is now sorted.</p>
+
+              <p className='inline-math'>Insertion sort is efficient for small datasets or arrays that are already nearly sorted. While its average and worst-case time complexity is <MathJax>{"\\(O(n^2)\\)"}</MathJax>, its simplicity and low overhead make it an attractive choice for certain scenarios where other algorithms might be more complex or unnecessary.</p>
+            </MathJaxContext>
+          </div>
+        }
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ const Algorithm = ({ algorithmState, updateAlgorithmState }) => {
   } = algorithmState;
 
   const mouseDownFromPopupRef = useRef(false);
+  const [showAlert, setShowAlert] = useState(localStorage.getItem('dimension') === '3d');
 
   useEffect(() => {
     const handleEscapeKeyPress = (event) => {
@@ -33,6 +34,18 @@ const Algorithm = ({ algorithmState, updateAlgorithmState }) => {
       }
     };
   }, [displayAnimation]);
+
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+        setShowAlert(localStorage.getItem('dimension') === '3d');
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+        window.removeEventListener('storage', handleStorageChange);
+    };
+}, []);
 
   const handleMouseDown = (event) => {
     if (event.target === event.currentTarget) {
@@ -76,7 +89,7 @@ const Algorithm = ({ algorithmState, updateAlgorithmState }) => {
             <div className="close-button">
               <IoCloseOutline onClick={() => updateAlgorithmState({ displayAnimation: false })} />
             </div>
-            <Sort key={keyVal} algorithm={fullAlgorithm} inputArray={inputtedArray} />
+            <Sort key={keyVal} algorithm={fullAlgorithm} inputArray={inputtedArray} showAlertOt={showAlert} />
           </div>
         </div>
       )}

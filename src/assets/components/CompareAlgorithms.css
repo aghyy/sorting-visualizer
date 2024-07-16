@@ -1,6 +1,5 @@
 .compare-algorithms-wrapper {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 80vw;
@@ -17,6 +16,7 @@
     width: 100%;
     margin: 20px;
     position: relative;
+    border: 1px solid #d1d1d1;
 }
 
 .compare-algorithms-card label {
@@ -121,33 +121,28 @@
 .sort-anim-outer-wrapper {
     z-index: 999;
     pointer-events: none;
+    width: 100%;
 }
 
 .sort-anim-wrapper {
     display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.compare-algorithms-wrapper .sort-card-controls-buttons {
-    margin: auto;
-}
-
-.compare-algorithms-wrapper input[type="range"] {
-    width: calc(100% - 40px);
-}
-
-@media only screen and (max-width: 1024px) {
-    .compare-algorithms-wrapper {
-        flex-direction: column;
-    }
-
+@media only screen and (max-width: 900px) {
     .compare-algorithms-card .select-container {
         flex-direction: column;
+        gap: 0;
+    }
+
+    .compare-algorithms-card .select-container div {
+        width: 100%;
     }
 
     .compare-algorithms-card select,
     .compare-algorithms-card input:not([type="checkbox"]) {
         width: 100%;
-        /* Full width for mobile */
     }
 }
 
@@ -156,6 +151,7 @@
         background: #1e1e1e;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         color: #ffffff;
+        border: 1px solid #2c2c2c;
     }
 
     .compare-algorithms-card p {

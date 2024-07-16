@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './NavBar.css';
-import logo from '../images/sort.svg';
 import { IoCaretDownOutline } from "react-icons/io5";
+import Logo from './Logo';
+import ToggleSwitch from './ToggleSwitch';
+import { handleAnimatedBg } from '../utils';
 
-const NavBar = ({ setSelectedOption }) => {
+const NavBar = ({ setSelectedOption, setBgKey, currentContainer, isBackgroundAnimated, setIsBackgroundAnimated }) => {
     const [showSubMenuOuter, setShowSubMenuOuter] = useState(false);
     const [showSubMenuInner, setShowSubMenuInner] = useState(false);
     let timeoutOuter;
@@ -14,7 +16,7 @@ const NavBar = ({ setSelectedOption }) => {
             setShowSubMenuOuter(false);
         }, 300);
     }
-    
+
     const handleMouseLeaveInner = () => {
         timeoutInner = setTimeout(() => {
             setShowSubMenuInner(false);
@@ -31,9 +33,55 @@ const NavBar = ({ setSelectedOption }) => {
         setShowSubMenuInner(true);
     }
 
+    const [showSubMenuOuterOptions, setShowSubMenuOuterOptions] = useState(false);
+    const [showSubMenuInnerOptions, setShowSubMenuInnerOptions] = useState(false);
+    let timeoutOuterOptions;
+    let timeoutInnerOptions;
+
+    const handleMouseLeaveOuterOptions = () => {
+        timeoutOuterOptions = setTimeout(() => {
+            setShowSubMenuOuterOptions(false);
+        }, 300);
+    }
+
+    const handleMouseLeaveInnerOptions = () => {
+        timeoutInnerOptions = setTimeout(() => {
+            setShowSubMenuInnerOptions(false);
+        }, 300);
+    }
+
+    const handleMouseEnterOuterOptions = () => {
+        clearTimeout(timeoutOuterOptions);
+        setShowSubMenuOuterOptions(true);
+    }
+
+    const handleMouseEnterInnerOptions = () => {
+        clearTimeout(timeoutInnerOptions);
+        setShowSubMenuInnerOptions(true);
+    }
+
+    const [isDotted, setIsDotted] = useState(false);
+
+    useEffect(() => {
+        if (isDotted) {
+            document.body.classList.add('dotted');
+            isBackgroundAnimated && handleAnimatedBg(isBackgroundAnimated, setIsBackgroundAnimated, setBgKey, currentContainer);
+        } else {
+            document.body.classList.remove('dotted');
+        }
+    }, [isDotted]);
+
+    const [is2D, setIs2D] = useState(localStorage.getItem('dimension') === '3d');
+
+    const handleDimensionChange = () => {
+        localStorage.setItem('dimension', is2D ? '2d' : '3d');
+        window.dispatchEvent(new Event('storage'));
+        setIs2D(!is2D);
+    }
+
     return (
         <nav>
-            <img src={logo} alt="sort-icon" className='logo' />
+            <Logo />
 
             <ul>
                 <li>
@@ -52,24 +100,49 @@ const NavBar = ({ setSelectedOption }) => {
                             <li>
                                 <div className='inner-nav-a' onClick={() => setSelectedOption('InsertionSort')}>
                                     <p>Insertion Sort</p>
-                                    <p className='nav-info-text'>Insertion Sort adds one item at a time to a sorted array. It is inefficient for large lists compared to quicksort, heapsort, or merge sort.</p>
+                                    <p className='nav-info-text'>Insertion Sort adds one item at a time to a sorted array.</p>
                                 </div>
                             </li>
                             <div className="vertical-nav-line"></div>
                             <li>
                                 <div className='inner-nav-a' onClick={() => setSelectedOption('SelectionSort')}>
                                     <p>Selection Sort</p>
-                                    <p className='nav-info-text'>Selection Sort repeatedly moves the smallest element to the front. It is inefficient for large lists compared to quicksort, heapsort, or merge sort.</p>
+                                    <p className='nav-info-text'>Selection Sort repeatedly moves the smallest element to the front.</p>
                                 </div>
                             </li>
                             <div className="vertical-nav-line"></div>
                             <li>
                                 <div className='inner-nav-a' onClick={() => setSelectedOption('BubbleSort')}>
                                     <p>Bubble Sort</p>
-                                    <p className='nav-info-text'>Bubble Sort repeatedly swaps adjacent out-of-order elements. It is inefficient for large lists compared to quicksort, heapsort, or merge sort.</p>
+                                    <p className='nav-info-text'>Bubble Sort repeatedly swaps adjacent out-of-order elements.</p>
                                 </div>
                             </li>
                         </ul>
+                    )}
+                </li>
+                <li onMouseEnter={handleMouseEnterOuterOptions} onMouseLeave={handleMouseLeaveOuterOptions}>
+                    <a className="sort-algorithm-a" href="#">
+                        Options
+                        <IoCaretDownOutline />
+                    </a>
+                    {(showSubMenuOuterOptions || showSubMenuInnerOptions) && (
+                        <div className='inner-nav-sort nav-options' onMouseEnter={handleMouseEnterInnerOptions} onMouseLeave={handleMouseLeaveInnerOptions}>
+                            <div>
+                                <p>Animated Background</p>
+                                <ToggleSwitch isChecked={isBackgroundAnimated} setIsChecked={() => {
+                                    setIsDotted(false);
+                                    handleAnimatedBg(isBackgroundAnimated, setIsBackgroundAnimated, setBgKey, currentContainer);
+                                }} />
+                            </div>
+                            <div>
+                                <p>Dotted Background</p>
+                                <ToggleSwitch isChecked={isDotted} setIsChecked={() => { setIsDotted(!isDotted) }} />
+                            </div>
+                            <div>
+                                <p>2D/3D</p>
+                                <ToggleSwitch isChecked={is2D} setIsChecked={handleDimensionChange} />
+                            </div>
+                        </div>
                     )}
                 </li>
             </ul>
