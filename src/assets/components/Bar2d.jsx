@@ -19,7 +19,7 @@ const Bar2d = memo(({ value, color, barHeight, length, index }) => {
     ];
 
     const barStyle = {
-        height: `${barHeight}%`,
+        height: `${barHeight > 0 ? barHeight : 0}%`,
         backgroundColor: colors[color][0],
         transition: '0.3s',
         position: 'absolute',
@@ -39,12 +39,12 @@ const Bar2d = memo(({ value, color, barHeight, length, index }) => {
         display: 'flex',
         flexDirection: 'column',
         gap: '5px',
-        width: `calc((100% - ((${length - 1}) * .15em)) / ${length})`,
+        width: `calc((100% - ((${length - 1}) * 2px)) / ${length})`,
         position: 'relative',
     };
 
     const tooltipStyle = {
-        bottom: `calc(${barHeight}% + 25px)`,
+        bottom: `calc(${barHeight > 0 ? barHeight : 0}% + 25px)`,
     };
 
     return (

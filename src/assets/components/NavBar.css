@@ -105,10 +105,6 @@ nav .logo {
     position: relative;
 }
 
-.option-text svg {
-    margin-top: -2px;
-}
-
 .dim-info-tooltip {
     display: none;
     position: absolute;

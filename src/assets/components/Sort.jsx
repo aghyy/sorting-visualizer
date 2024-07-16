@@ -308,7 +308,7 @@ const Sort = forwardRef(({ algorithm, inputArray, hideControls, setParentIsRunni
 
   useEffect(() => {
     if (isVolume && currentStep && isRunning) {
-      generateSound(600, 50);
+      generateSound(600, delay < 100 ? 100 : delay);
     }
   }, [currentStep]);
 

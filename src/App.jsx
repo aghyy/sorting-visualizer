@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
+import './assets/components/InputRange.css';
 import NavBar from './assets/components/NavBar';
 import Algorithm from './assets/components/Algorithm';
 import InsertionSort from './assets/components/InsertionSort';
