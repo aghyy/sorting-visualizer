@@ -44,7 +44,7 @@
 }
 
 .bar-2d:hover > div {
-	transform: scale(1.02);
+	/* transform: scale(1.02); */
 	background-color: rgb(24, 158, 131) !important;
 }
 
