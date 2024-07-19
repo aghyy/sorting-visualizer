@@ -3,7 +3,6 @@ import './CompareAlgorithms.css';
 import { bubbleSort, selectionSort, insertionSort, removeStringFromArray } from '../utils';
 import Sort from './Sort';
 import { IoPlay, IoPlaySkipBack, IoPlaySkipForward, IoRefreshOutline, IoPause, IoShuffleOutline, IoVolumeMediumOutline, IoVolumeMuteOutline } from "react-icons/io5";
-import e from 'cors';
 
 const CompareAlgorithms = ({ algorithmState, updateAlgorithmState }) => {
   const {
