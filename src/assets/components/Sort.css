@@ -173,7 +173,7 @@
 		background-color: #131313;
 	}
 
-	.shuffle-btn:hover+.shuffle-tooltip {
+	.shuffle-btn:not(:disabled):hover+.shuffle-tooltip {
 		background-color: #333;
 		color: #fff;
 	}
